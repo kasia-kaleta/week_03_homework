@@ -27,7 +27,7 @@ class Film
   end
 
   def self.all()
-    sql = "SELECT * FROM film"
+    sql = "SELECT * FROM films"
     film_data = SqlRunner.run(sql)
     return Film.map_items(film_data)
   end
