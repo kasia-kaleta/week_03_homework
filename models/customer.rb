@@ -1,14 +1,14 @@
 require_relative("../db/sql_runner")
 
-class Tickets
+class Customer
 
   attr_reader :id
-  attr_accessor :customer_id, :film_id
+  attr_accessor :name, :funds
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
-    @customer_id = options['customer_id'].to_i
-    @film_id = options['film_id'].to_i
+    @name = options['name']
+    @funds = options['funds'].to_i
   end
 
   end
