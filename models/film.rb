@@ -45,7 +45,16 @@ class Film
     customer_data = SqlRunner.run(sql, values)
     return Customer.map_items(customer_data)
   end
-  
+
+# Checks how many customers are going to watch a certain film:
+  def get_num_customers()
+    sql = "SELECT customer_id FROM tickets WHERE film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.count
+  end
+
+
  # Deletes entries from films table based on their id:
   def delete()
     sql = "DELETE * FROM films where id = $1"
