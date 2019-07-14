@@ -38,8 +38,10 @@ class Customer
 # Show which films customers booked:
   def films()
     sql = "SELECT films.* FROM films
+    INNER JOIN screenings
+    ON films.id = screenings.film_id
     INNER JOIN tickets
-    ON films.id = tickets.film_id
+    ON tickets.screening_id = screenings.id
     WHERE customer_id = $1"
     values = [@id]
     film_data = SqlRunner.run(sql, values)
@@ -60,22 +62,22 @@ class Customer
   end
 
 # Function for buying ticket by a customer:
-  def buy_ticket(film)
+  def buy_ticket(screening)
+    sql = "SELECT films.* FROM films WHERE id = $1"
+    values = [screening.film_id]
+    film = Film.map_items(SqlRunner.run(sql, values))[0];
+
     if @funds >= film.price
       ticket = Ticket.new({
       'screening_id' => screening.id,
       'customer_id' => @id
       })
       ticket.save()
-      deduct_funds_for_ticket(film)
-    end
-  end
 
-# Decreases customers funds by the price of the ticket:
-  def deduct_funds_for_ticket(film)
-    if @funds >= film.price
       @funds -= film.price
       update()
+    else
+      p "Not enough money!"
     end
   end
 

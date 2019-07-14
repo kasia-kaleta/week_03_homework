@@ -23,7 +23,8 @@ class Screening
 
   # Updates screenings table:
   def update()
-    sql = "UPDATE screenings SET (film_id, screening_time) = ($1, $2) WHERE id = $3"
+    sql = "UPDATE screenings SET (film_id, screening_time) = ($1, $2)
+    WHERE id = $3"
     values = [@film_id, @screening_time, @id]
     SqlRunner.run(sql, values)
   end
@@ -34,6 +35,13 @@ class Screening
     data = SqlRunner.run(sql)
     return data.map{|screening| Screening.new(screening)}
   end
+
+  # Checks how many tickets were sold for one screening:
+  def tickets_sold_out()
+    sql = "SELECT film_id FROM screenings WHERE screening_time = $1"
+    values = [@screening_time]
+    SqlRunner.run(sql,values)
+    
 
   # Deletes entries from screenings table based on their id:
   def delete()
