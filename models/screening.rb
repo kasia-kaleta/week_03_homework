@@ -41,5 +41,11 @@ class Screening
     values = [@id]
     SqlRunner.run(sql, values)
   end
-  
+
+  # Deletes all entries from screenings table:
+  def self.delete_all()
+    sql = "DELETE FROM screenings"
+    SqlRunner.run(sql)
+  end
+
 end
