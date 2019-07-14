@@ -11,6 +11,7 @@ class Ticket
     @film_id = options['film_id'].to_i
   end
 
+# Creates and saves data in tickets table:
   def save()
     sql = "INSERT INTO tickets (customer_id, film_id)
     VALUES ($1, $2)
@@ -20,26 +21,30 @@ class Ticket
     @id = ticket['id'].to_i
   end
 
+# Updates ticket table:
   def update()
     sql = "UPDATE tickets SET (customer_id, film_id) = ($1, $2) WHERE id = $3"
     values = [@customer_id, @film_id, @id]
     SqlRunner.run(sql, values)
   end
 
+# Mapping data from tickets table to new Ticket objects:
   def self.all()
     sql = "SELECT * FROM tickets"
     data = SqlRunner.run(sql)
     return data.map{|ticket| Ticket.new(ticket)}
   end
 
+# Deletes entries from tickets table based on their id:
   def delete()
     sql = "DELETE * FROM tickets where id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
 
+# Deletes all entries from tickets table:
   def self.delete_all()
-    sql = "DELETE FROM films"
+    sql = "DELETE FROM tickets"
     SqlRunner.run(sql)
   end
 
