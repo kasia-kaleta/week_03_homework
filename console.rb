@@ -1,6 +1,7 @@
 require_relative('models/film')
 require_relative('models/customer')
 require_relative('models/ticket')
+require_relative('models/screening')
 
 require('pry-byebug')
 
@@ -66,17 +67,17 @@ screening2.save()
 screening3.save()
 
 ticket1 = Ticket.new({
-  'film_id' => film1.id,
+  'screening_id' => screening1.id,
   'customer_id' => customer1.id
   })
 
 ticket2 = Ticket.new({
-  'film_id' => film2.id,
+  'screening_id' => screening2.id,
   'customer_id' => customer2.id
   })
 
 ticket3 = Ticket.new({
-  'film_id' => film3.id,
+  'screening_id' => screening3.id,
   'customer_id' => customer3.id
 })
 

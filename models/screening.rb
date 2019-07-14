@@ -8,7 +8,25 @@ class Screening
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @film_id = options['film_id'].to_i
-    @screening_time = options['screening_time'].to_i
+    @screening_time = options['screening_time']
   end
 
-end 
+  # Creates and saves data in screenings table:
+  def save()
+    sql = "INSERT INTO screenings(film_id, screening_time)
+    VALUES ($1, $2)
+    RETURNING id"
+    values = [@film_id, @screening_time]
+    screening = SqlRunner.run(sql, values)[0];
+    @id = screening['id'].to_i
+  end
+
+  # Updates screenings table:
+  def update()
+    sql = "UPDATE screenings SET (film_id, screening_time) = ($1, $2) WHERE id = $3"
+    values = [@film_id, @screening_time, @id]
+    SqlRunner.run(sql, values)
+  end
+
+
+end
