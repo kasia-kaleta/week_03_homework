@@ -44,9 +44,20 @@ customer3 = Customer.new({
   })
 customer3.save()
 
-ticket1 = Ticket.new({'film_id' => film1.id, 'customer_id' => customer1.id, 'price' => 8})
-ticket2 = Ticket.new({'film_id' => film2.id, 'customer_id' => customer2.id, 'price' => 8})
-ticket3 = Ticket.new({'film_id' => film3.id, 'customer_id' => customer3.id, 'price' => 8})
+ticket1 = Ticket.new({
+  'film_id' => film1.id,
+  'customer_id' => customer1.id,
+  'price' => 8})
+
+ticket2 = Ticket.new({
+  'film_id' => film2.id,
+  'customer_id' => customer2.id,
+  'price' => 8})
+  
+ticket3 = Ticket.new({
+  'film_id' => film3.id,
+  'customer_id' => customer3.id,
+  'price' => 8})
 
 ticket1.save()
 ticket2.save()

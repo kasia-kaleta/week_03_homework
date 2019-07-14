@@ -15,7 +15,7 @@ class Ticket
     sql = "INSERT INTO tickets (customer_id, film_id)
     VALUES ($1, $2)
     RETURNING id"
-    values = [@mcustomer_id, @film_id]
+    values = [@customer_id, @film_id]
     ticket = SqlRunner.run(sql, values)[0];
     @id = ticket['id'].to_i
   end
