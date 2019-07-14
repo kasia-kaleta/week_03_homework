@@ -49,7 +49,7 @@ class Film
   end
 
   def self.map_items(data)
-    result = data.map{|film| Film.new(customer)}
+    result = data.map{|film| Film.new(film)}
     return result
   end
 

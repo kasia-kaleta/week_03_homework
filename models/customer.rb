@@ -53,6 +53,24 @@ class Customer
     return result
   end
 
+  def buy_ticket(film)
+    if @funds >= film.price
+      ticket = Ticket.new({
+      'film_id' => film.id,
+      'customer_id' => @id
+      })
+      ticket.save()
+      deduct_funds_for_ticket(film)
+    end
+  end
+
+  def deduct_funds_for_ticket(film)
+    if @funds >= film.price
+      @funds -= film.price
+      update()
+    end
+  end
+
   def self.delete_all()
     sql = "DELETE FROM films"
     SqlRunner.run(sql)
