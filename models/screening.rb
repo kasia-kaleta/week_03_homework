@@ -28,5 +28,11 @@ class Screening
     SqlRunner.run(sql, values)
   end
 
+  # Mapping data from screenings table to new Screening objects:
+  def self.all()
+    sql = "SELECT * FROM screenings"
+    data = SqlRunner.run(sql)
+    return data.map{|screening| Screening.new(screening)}
+  end
 
 end
