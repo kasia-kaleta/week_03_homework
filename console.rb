@@ -8,6 +8,7 @@ Ticket.delete_all()
 Film.delete_all()
 Customer.delete_all()
 
+
 film1 = Film.new({
   'title' => 'Spiderman Far from home',
   'price' => 8
@@ -26,6 +27,7 @@ film3 = Film.new({
   })
 film3.save()
 
+
 customer1 = Customer.new({
   'name' => 'Billy',
   'funds' => 15
@@ -43,6 +45,25 @@ customer3 = Customer.new({
   'funds' => 100
   })
 customer3.save()
+
+screening1 = Screening.new({
+  'film_id' => film1.id,
+  'screening_time' => '15:00'
+  })
+
+screening2 = Screening.new({
+  'film_id' => film2.id,
+  'screening_time' => '22:00'
+  })
+
+screening3 = Screening.new({
+  'film_id' => film3.id,
+  'screening_time' => '18:00'
+  })
+
+screening1.save()
+screening2.save()
+screening3.save()
 
 ticket1 = Ticket.new({
   'film_id' => film1.id,
